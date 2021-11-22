@@ -1,29 +1,33 @@
 include("pessoa.jl")
+using Setfield
 
 abstract type Nodo end
 
 struct No <: Nodo
      pessoa::tp_Pessoa
-     ante::No
-     prox::No
+     ante::Union{No,Nothing}
+     prox::Union{No,Nothing}
 end;
+
+No(p::tp_Pessoa) = No(p, Nothing(), Nothing())
 
 getAnterior(n::No) = n.ante
 getProximo(n::No) = n.prox
 getPessoa(n::No) = n.pessoa
 
-function criarNo(n::No,p::tp_Pessoa)
+function criarElemento(n::No,p::tp_Pessoa)
     n.pessoa = p
     n.ante = nothing
     n.prox = nothing
-    return true
 end
 
 function adicionarProx(n::No, p::tp_Pessoa)
-    criarNo(novo,p)
-    novo.ante = n
-    n.prox = novo
+    novo = No(p)
+    novo.ante = @set n
+    n.prox = @set novo
     return true
 end
 
-    
+function mostrarElemento(n::No)
+    bio(getPessoa(n))
+end
