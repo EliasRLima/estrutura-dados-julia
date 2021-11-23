@@ -2,7 +2,7 @@ include("../classes/nodo.jl")
 
 abstract type Arvore end
 
-struct tp_Arvore <: Arvore
+mutable struct tp_Arvore <: Arvore
     elemento::No
     key::Int
     left::Union{tp_Arvore,Nothing}

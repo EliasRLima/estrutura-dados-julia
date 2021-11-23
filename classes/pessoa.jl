@@ -1,6 +1,6 @@
 abstract type Pessoa end
 
-struct tp_Pessoa <: Pessoa
+mutable struct tp_Pessoa <: Pessoa
     nome::String
     idade::Int64
     cpf::String

@@ -1,15 +1,16 @@
 include("pessoa.jl")
-using Setfield
+#using Setfield
 
 abstract type Nodo end
 
-struct No <: Nodo
-     pessoa::tp_Pessoa
+mutable struct No <: Nodo
+     pessoa::Union{tp_Pessoa,Nothing}
      ante::Union{No,Nothing}
      prox::Union{No,Nothing}
-end;
+end
 
 No(p::tp_Pessoa) = No(p, Nothing(), Nothing())
+No(n::Nothing) = No(Nothing(), Nothing(), Nothing())
 
 getAnterior(n::No) = n.ante
 getProximo(n::No) = n.prox
@@ -23,8 +24,8 @@ end
 
 function adicionarProx(n::No, p::tp_Pessoa)
     novo = No(p)
-    novo.ante = @set n
-    n.prox = @set novo
+    novo.ante = n
+    n.prox = novo#@set novo
     return true
 end
 
