@@ -22,6 +22,13 @@ function criarElemento(n::No,p::tp_Pessoa)
     n.prox = nothing
 end
 
+function adicionarAnt(n::No, p::tp_Pessoa)
+    novo = No(p)
+    novo.prox = n
+    n.ante = novo
+    return true
+end
+
 function adicionarProx(n::No, p::tp_Pessoa)
     novo = No(p)
     novo.ante = n

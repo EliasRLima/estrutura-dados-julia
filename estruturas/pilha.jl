@@ -6,7 +6,6 @@ mutable struct tp_Pilha <: Pilha
     elemento::No
 end
 
-primeiro(p::tp_Pilha) = p.elemento
 tp_Pilha(p::Any) = tp_Pilha(No(p::Any))
 tp_Pilha(p::Nothing) = tp_Pilha(No(p::Nothing))
 
@@ -32,7 +31,7 @@ function mostrarPilha(p::tp_Pilha)
     end
 
     println("Mostrar pilha: ")
-    elem_1 = primeiro(p)
+    elem_1 = p.elemento
     while elem_1 != Nothing()
        mostrarElemento(elem_1)
        elem_1 = getProximo(elem_1)

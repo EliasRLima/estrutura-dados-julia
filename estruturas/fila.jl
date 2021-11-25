@@ -6,7 +6,6 @@ mutable struct tp_Fila <: Fila
    elemento::No
 end
 
-primeiro(f::tp_Fila) = f.elemento
 tp_Fila(p::Any) = tp_Fila(No(p::Any))
 tp_Fila(n::Nothing) = tp_Fila(No(n::Nothing))
 zerada() = tp_Fila(Nothing())
@@ -17,7 +16,7 @@ function criarFila(f::tp_Fila,p::Any)
 end
 
 function removerDaFila(f::tp_Fila) 
-     elem_1 = primeiro(f)
+     elem_1 = f.elemento
      elem_2 = getProximo(elem_1)
      if elem_2 == Nothing()
        f = zerada()
@@ -35,7 +34,7 @@ function  adicionarNaFila(f::tp_Fila,p::Any)
         return
     end
 
-    elem_1 = primeiro(f)
+    elem_1 = f.elemento
     if elem_1 == Nothing() #se lista vazia
         f.elemento = No(p)
     else #senao ir ate final
@@ -47,7 +46,6 @@ function  adicionarNaFila(f::tp_Fila,p::Any)
         end
         adicionarProx(elem_3,p)
     end
-
 end
 
 function mostrarFila(f::Fila)
@@ -58,7 +56,7 @@ function mostrarFila(f::Fila)
     end
 
     println("Mostrar fila: ")
-    elem_1 = primeiro(f)
+    elem_1 = f.elemento
     while elem_1 != Nothing()
         mostrarElemento(elem_1)
         elem_1 = getProximo(elem_1)
