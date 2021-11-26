@@ -45,3 +45,25 @@ function adicionarNaLista(l::tp_Lista, n::Any, idx::Int64)
     end
 
 end
+
+function removerDaLista(l::tp_Lista, idx::Int64)
+    if idx > tamanhoLista(l) #remover do final
+        elm = l.elemento
+        for i in 2:(tamanhoLista(l)-2)
+            elm = getProximo(elm)
+        end
+        elm.elemento.prox = Nothing()
+    else
+        if idx <= 1 #remover do começo
+           l.elemento = getProximo(l.elemento) #sobrescrevendo o inicio
+        else #remover do meio
+            elm = l.elemento
+            for i in 2:(idx-1)
+               elm = getProximo(elm) 
+            end
+            adicionarProx(elm,getProximo(getProximo(elm))) #elm recebe como prox duas posicoes a frente
+        end
+    end
+
+end
+
